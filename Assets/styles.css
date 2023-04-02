@@ -196,8 +196,11 @@ span{
 @media only screen and (min-width: 320px) and (max-width: 767px){
 
     h1{
-        font-size: 3.5rem !important;
+        font-size: 1.7rem !important;
         width: 100vw;
+    }
+    .mainStats{
+        height: 75vh !important;
     }
     footer{
         height: 15vh;
@@ -250,10 +253,12 @@ span{
     }
     table{
         font-size: 10px;
-        height: 50vh;
+        height: 60vh;
+        width: 95vw;
+        border-color: rgb(12, 61, 29);
     }
-    table thead th{
-        font-size: 12px;
+    th{
+        font-size: 14px !important;
     }
     table tbody td{
         height: .3rem;
