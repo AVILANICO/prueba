@@ -1,0 +1,295 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.navbar{
+    background-color: #1852b6; 
+}
+.nav-item{
+    padding-right: 1rem;
+    text-align: center;
+}
+.nav-link{
+    color: white !important;
+}
+#carouselExample{
+    background-color: #0069ffb8;
+}
+.carousel-item a{
+    color: white;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+}
+.carousel-item a:hover{
+    color: black;
+}
+#estoy{
+    border: 2px solid red;
+    border-radius: 20%;
+    background-color: rgba(255, 0, 0, 0.253);
+}
+#estoy:hover{
+    background-color: black;
+    color: white;
+}
+
+.carousel{
+    height: 25vh;
+    display: flex;
+    align-items: center;
+}
+.carousel-inner{
+    color: black !important;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.carousel-item{
+    width: auto !important;
+    margin: 0 !important;
+}
+.carousel-item h1{
+    font-size: 5rem;
+}
+
+h1{
+    width: 40vw;
+    text-align: center;
+}
+
+.divCheckBoxBuscador .container-fluid{
+    background-color: #1e61d2; 
+    color: white;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.checkBox{
+    width: 50vw;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+#search{
+    width: 20vw;
+}
+.buscador{
+    width: 25vw;
+}
+.buscador button{
+    width: 2rem;
+}
+main{
+    background-color:  #658caf;
+}
+.div1{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.div2{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.card-body{
+    background-color: #5183d8;
+}
+.columna{
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+h5{
+    text-align: center;
+    text-decoration: underline;
+}
+.precioBoton{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainDetails{
+    height: 82.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.divDetails{
+    display: flex;
+    border: 15px solid grey;
+    border-radius: 3%;
+    padding: 1rem;
+    gap: 2rem;
+}
+.divTexto{
+    border: 10px solid grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.divTexto h5{
+    text-decoration: none;
+}
+.mainFormulario{
+    height: 70vh;
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    font-size: 24px;
+    font-weight: bolder;
+}
+.formulario{
+    height: 50vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+.fieldForm{
+    display: flex;
+    flex-direction: column;
+}
+#mensaje{
+    height: 7rem;
+}
+#submit{
+    width: 5rem;
+    font-size: 18px;
+    align-self: flex-end;
+}
+
+.mainStats{
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+table{
+    background-color: #5183d8; 
+    border: 3px solid black;
+    width: 90vw;
+    height: 55vh;
+    color: white;
+}
+table tbody td{
+    border: 1px solid black;
+    color: black;
+}
+table th{
+    background-color: #1852b6; 
+    height: 1rem;
+    font-size: 1.3rem;
+}
+
+
+footer{
+    background-color: black;
+    height: 11vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+span{
+    color: red;
+}
+.social{
+    display: flex;
+    gap: 1rem;
+}
+
+
+
+@media only screen and (min-width: 320px) and (max-width: 575px){
+    main{
+        height: 420vh;
+    }
+    footer{
+        height: 15vh;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    form{
+        font-size: 14px;
+    }
+    #mensaje{
+        height: 5rem;
+    }
+    table th{
+        font-size: .8rem;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px){
+    #search{
+        width: 10vw;
+    }
+    .divCheckBoxBuscador .container-fluid{
+        height: 25vh;
+    }
+    .mainStats{
+        height: 60vh;
+    }
+    table{
+        font-size: 10px;
+        height: 50vh;
+    }
+    table thead th{
+        font-size: 12px;
+    }
+    table tbody td{
+        height: .3rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    #search{
+        width: 17vw;
+    }
+    main{
+        height: 240vh;
+    }
+    table{
+        font-size: 12px;
+        height: 50vh;
+    }
+    table thead th{
+        font-size: 14px;
+    }
+    table tbody td{
+        height: .5rem;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px){
+    .navbar{
+        font-size: .8rem;
+    }
+    .nav-item{
+        padding-right: .2rem;
+    }
+    #search{
+        width: 15vw;
+    }
+    main{
+        height: 240vh;
+    }
+}
+
