@@ -48,14 +48,14 @@
 
   <header>
     <div class="carrusel">
-      <div id="carouselExample" class="carousel carousel-dark slide">
+      <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
-          <div class="carousel-item active">
+          <div class="carousel-item">
             <a href="../../index.html">
               <h1>Home</h1>
             </a>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item active">
             <a href="#">
               <h1>Upcoming Events</h1>
             </a>
@@ -90,41 +90,17 @@
   
   <div class="divCheckBoxBuscador">
     <div class="container-fluid">
-      <div class="checkBox">
-        <fieldset>
-          <input type="checkbox" name="CheckBox" id="check1">
-          <label for="check1">Category</label>
-        </fieldset>
-        <fieldset>
-          <input type="checkbox" name="CheckBox" id="check2">
-          <label for="check2">Category</label>
-        </fieldset>
-        <fieldset>
-          <input type="checkbox" name="CheckBox" id="check3">
-          <label for="check3">Category</label>
-        </fieldset>
-        <fieldset>
-          <input type="checkbox" name="CheckBox" id="check4">
-          <label for="check4">Category</label>
-        </fieldset>
-        <fieldset>
-          <input type="checkbox" name="CheckBox" id="check5">
-          <label for="check5">Category</label>
-        </fieldset>
+      <div class="checkBox" id="div-checkBoxs">
+
       </div>
-      <div class="buscador">
+      <div class="buscador" id="div-buscador">
         <fieldset>
-          <input type="search" name="search" id="search" placeholder="search...">
-          <button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg>
-          </button>
+          <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" id="buscador">
         </fieldset>
       </div>
     </div>
   </div>
-  <main class="flex-grow-1 container-fluid d-flex justify-content-center flex-wrap py-5 gap-3" id="contenedor-eventos">
+  <main class="flex-grow-1 container-fluid d-flex justify-content-center flex-wrap py-5 gap-3 noHayCardH2" id="contenedor-eventos">
 
   </main>
 

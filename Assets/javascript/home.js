@@ -1,18 +1,47 @@
-const contenedor = document.getElementById('contenedor-eventos');
+const $contenedor = document.getElementById('contenedor-eventos');
+const $checkBoxs = document.getElementById('div-checkBoxs');
+const $buscador = document.getElementById('buscador');
 
-const arrayEventos = data.eventos;
+let arrayEventos = data.eventos;
+const events = arrayEventos.filter(cat => cat.category) //agentes
 
-const eventoSolo = arrayEventos[0];
 
-// console.log(arrayEventos[0])
+//SETEADO
 
-let plantilla = '';
+//"categorias" me devuelve un arreglo con solo las categorias
+const categorias = events.map(event => event.category)
 
-for (const evento of arrayEventos) {
-  plantilla += crearEventos(evento);
-}
+//el set "filtra" lo repetido
+const setCategorias = new Set(categorias);
 
-contenedor.innerHTML = (plantilla);
+//Array.from me transforma en array lo que le pase como argumento.
+const arrayCategorias = Array.from(setCategorias)
+
+
+//EVENTOS
+/*-----------------------------------------------------------------------------------------------------------------------*/
+$checkBoxs.addEventListener("click", () => {
+  //querySelectorAll('input:checked') selecciona todos los elementos <input> que están chequeados (osea que tienen el atributo checked).
+  //Array.from() convierte el NodeList resultante de querySelectorAll en un Array.
+  //.map(cb => cb.id) aplica una función de mapeo a cada elemento del Array resultante. La función de mapeo toma cada elemento (representado por la variable cb) y devuelve su valor del atributo id. Entonces el resultado final es un nuevo Array que contiene solo los valores del atributo id de los elementos chequeados.
+  //Por lo tanto, el código arrayCheckboxsID contiene un Array con los id de los checkboxes que han sido seleccionados en el momento del evento 'click'
+  const arrayCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
+
+  const eventosFiltrados = filtroCruzado(events, arrayCheckboxsID, $buscador.value)
+  template(eventosFiltrados)
+})
+
+$buscador.addEventListener("input", () => {
+
+  const arrayCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
+
+  const eventosFiltrados = filtroCruzado(events, arrayCheckboxsID, $buscador.value)
+
+  template(eventosFiltrados)
+})
+
+//FUNCIONES CREAR EVENTOS
+/*-----------------------------------------------------------------------------------------------------------------------*/
 
 function crearEventos(eventoSolo){
   return `<div class="card col-11 col-md-4 col-xl-3 ">
@@ -22,11 +51,53 @@ function crearEventos(eventoSolo){
               <p class="card-text"> Price: ${eventoSolo.description} </p>
               <div class = "div-precioBoton">
                 <p class="card-text"> Price: ${eventoSolo.price} </p>
-                <a href="" class="btn btn-primary">Details</a>
+                <a href="./assets/pages/details.html?id=${eventoSolo.name}" class="btn btn-primary">Details</a>
               </div>
-            </div>
-          </div> 
-`
+            </div> 
+          </div>`
 }
+// ? id=${key value identificador} ==> el ? lo que hace es agregar al URL la direccion del nuevo key value (id).
 
-console.log(plantilla)
+function template(array){
+  let plantilla = '';
+  if(array.length === 0){
+    $contenedor.innerHTML = `<h2>¡Sorry! There are no events to show :(</h2>`
+  }
+  else{
+    for (const evento of array) {
+      plantilla += crearEventos(evento);
+    }
+    $contenedor.innerHTML = (plantilla);
+  }
+}
+template(arrayEventos)
+
+function imprimirCheckboxs(categoria, checkbox){
+  let plantilla = '';
+
+  for (const evento of categoria) {
+    plantilla += `
+    <div class="divInputLabel">
+      <input type="checkbox" name="CheckBox" id="${evento}" class="classCheckbox">
+      <label for="${evento}">${evento}</label>
+    </div>`;
+  }
+  checkbox.innerHTML = (plantilla);
+}
+imprimirCheckboxs(arrayCategorias, $checkBoxs)
+
+//FUNCION FILTRO
+/*-----------------------------------------------------------------------------------------------------------------------*/
+function filtroCruzado(eventos, categoria, texto){
+  let eventosFiltrados = eventos;
+  //si hay alguna categoría seleccionada, se filtran los eventos que tengan la misma categoría que la seleccionada.
+  
+  if (categoria.length > 0) {
+    eventosFiltrados = eventos.filter(evento => categoria.includes(evento.category));
+  }
+  //Si hay un texto ingresado se filtran los eventos que incluyan ese texto en su nombre
+  if (texto) {
+    eventosFiltrados = eventosFiltrados.filter(evento => evento.name.toLowerCase().includes(texto.toLowerCase()));
+  }
+  return eventosFiltrados;
+}
