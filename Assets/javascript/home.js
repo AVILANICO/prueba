@@ -29,7 +29,7 @@ $checkBoxs.addEventListener("click", () => {
 
   const eventosFiltrados = filtroCruzado(events, arrayCheckboxsID, $buscador.value)
   template(eventosFiltrados)
-})
+}) 
 
 $buscador.addEventListener("input", () => {
 

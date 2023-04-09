@@ -9,7 +9,7 @@ console.log(params);
 let id = params.get('id') 
 //el get nos devuelve la direccion url de cada card pero sin la palabrita "id", solo nos devuelve el valor de id: Korean%20style 
 
-console.log(id);
+console.log(id); 
 
 let arrayEventos = data.eventos;
 
