@@ -1,21 +1,21 @@
 const $contenedor = document.getElementById('contenedor-eventos');
 const $checkBoxs = document.getElementById('div-checkBoxs');
 const $buscador = document.getElementById('buscador');
-let arrayEventos = data.eventos; //ARRAY TOTAL
-let arrayEventosPast = filtrarPast(arrayEventos);//ARRAY FILTRADOR DE EVENTOS PAST
+let arregloEventos = data.eventos; //ARRAY TOTAL
+let arregloEventosPast = filtrarPast(arregloEventos);//ARRAY FILTRADOR DE EVENTOS PAST
 
 
 //SETEADO
-const events = arrayEventos.filter(cat => cat.category) //agentes
+const eventos = arregloEventos.filter(cat => cat.category) //agentes
 
 //"categorias" me devuelve un arreglo con solo las categorias
-const categorias = events.map(event => event.category)
+const categorias = eventos.map(event => event.category)
 
 //el set "filtra" lo repetido
 const setCategorias = new Set(categorias);
 
 //Array.from me transforma en array lo que le pase como argumento.
-const arrayCategorias = Array.from(setCategorias)
+const arregloCategorias = Array.from(setCategorias)
 
 
 //EVENTOS
@@ -24,18 +24,18 @@ $checkBoxs.addEventListener("click", () => {
   //querySelectorAll('input:checked') selecciona todos los elementos <input> que están chequeados (osea que tienen el atributo checked).
   //Array.from() convierte el NodeList resultante de querySelectorAll en un Array.
   //.map(cb => cb.id) aplica una función de mapeo a cada elemento del Array resultante. La función de mapeo toma cada elemento (representado por la variable cb) y devuelve su valor del atributo id. Entonces el resultado final es un nuevo Array que contiene solo los valores del atributo id de los elementos chequeados.
-  //Por lo tanto, el código arrayCheckboxsID contiene un Array con los id de los checkboxes que han sido seleccionados en el momento del evento 'click'
-  const arrayCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
+  //Por lo tanto, el código arregloCheckboxsID contiene un Array con los id de los checkboxes que han sido seleccionados en el momento del evento 'click'
+  const arregloCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
 
-  const eventosFiltrados = filtroCruzado(arrayEventosPast, arrayCheckboxsID, $buscador.value)
+  const eventosFiltrados = filtroCruzado(arregloEventosPast, arregloCheckboxsID, $buscador.value)
   template(eventosFiltrados)
 })
 
 $buscador.addEventListener("input", () => {
 
-  const arrayCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
+  const arregloCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
 
-  const eventosFiltrados = filtroCruzado(arrayEventosPast, arrayCheckboxsID, $buscador.value)
+  const eventosFiltrados = filtroCruzado(arregloEventosPast, arregloCheckboxsID, $buscador.value)
 
   template(eventosFiltrados)
 })
@@ -55,7 +55,7 @@ function template(array){
     $contenedor.innerHTML = (plantilla);
   }
 }
-template(arrayEventosPast)
+template(arregloEventosPast)
 
 function crearEventos(eventoSolo){
   return `<div class="card col-11 col-md-4 col-xl-3 ">
@@ -83,15 +83,15 @@ function imprimirCheckboxs(categoria, checkbox){
   }
   checkbox.innerHTML = (plantilla);
 }
-imprimirCheckboxs(arrayCategorias, $checkBoxs)
+imprimirCheckboxs(arregloCategorias, $checkBoxs)
 
 
-function filtrarPast(array){
+function filtrarPast(arreglo){
   const fechaActual = data.fechaActual;
 
-  const filtroPastEvents = array.filter(evento => evento.date < fechaActual)
+  const filtroPastEventos = arreglo.filter(evento => evento.date < fechaActual)
 
-  return filtroPastEvents;
+  return filtroPastEventos;
 }
 
 function filtroCruzado(eventos, categoria, texto){

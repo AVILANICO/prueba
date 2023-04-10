@@ -1,22 +1,22 @@
 const $contenedor = document.getElementById('contenedor-eventos');
 const $checkBoxs = document.getElementById('div-checkBoxs');
 const $buscador = document.getElementById('buscador');
-let arrayEventos = data.eventos; //ARRAY TOTAL
-let arrayEventosUpcoming = filtrarUpcoming(arrayEventos);//ARRAY FILTRADOR DE EVENTOS UPCOMING
+let arregloEventos = data.eventos; //ARRAY TOTAL
+let arregloEventosUpcoming = filtrarUpcoming(arregloEventos);//ARRAY FILTRADOR DE EVENTOS UPCOMING
 
 
 //SETEADO
 
-const events = arrayEventos.filter(cat => cat.category) //agentes
+const eventos = arregloEventos.filter(cat => cat.category) //agentes
 
 //"categorias" me devuelve un arreglo con solo las categorias
-const categorias = events.map(event => event.category)
+const categorias = eventos.map(event => event.category)
 
 //el set "filtra" lo repetido
 const setCategorias = new Set(categorias);
 
 //Array.from me transforma en array lo que le pase como argumento.
-const arrayCategorias = Array.from(setCategorias)
+const arregloCategorias = Array.from(setCategorias)
 
 
 //EVENTOS
@@ -25,18 +25,18 @@ $checkBoxs.addEventListener("click", () => {
   //querySelectorAll('input:checked') selecciona todos los elementos <input> que están chequeados (osea que tienen el atributo checked).
   //Array.from() convierte el NodeList resultante de querySelectorAll en un Array.
   //.map(cb => cb.id) aplica una función de mapeo a cada elemento del Array resultante. La función de mapeo toma cada elemento (representado por la variable cb) y devuelve su valor del atributo id. Entonces el resultado final es un nuevo Array que contiene solo los valores del atributo id de los elementos chequeados.
-  //Por lo tanto, el código arrayCheckboxsID contiene un Array con los id de los checkboxes que han sido seleccionados en el momento del evento 'click'
-  const arrayCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
+  //Por lo tanto, el código arregloCheckboxsID contiene un Array con los id de los checkboxes que han sido seleccionados en el momento del evento 'click'
+  const arregloCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
 
-  const eventosFiltrados = filtroCruzado(arrayEventosUpcoming, arrayCheckboxsID, $buscador.value)
+  const eventosFiltrados = filtroCruzado(arregloEventosUpcoming, arregloCheckboxsID, $buscador.value)
   template(eventosFiltrados)
 })
 
 $buscador.addEventListener("input", () => {
 
-  const arrayCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
+  const arregloCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
 
-  const eventosFiltrados = filtroCruzado(arrayEventosUpcoming, arrayCheckboxsID, $buscador.value)
+  const eventosFiltrados = filtroCruzado(arregloEventosUpcoming, arregloCheckboxsID, $buscador.value)
 
   template(eventosFiltrados)
 })
@@ -44,19 +44,19 @@ $buscador.addEventListener("input", () => {
 //FUNCIONES
 /*-----------------------------------------------------------------------------------------------------------------------*/
 
-function template(array){
+function template(arreglo){
   let plantilla = '';
-  if(array.length === 0){
+  if(arreglo.length === 0){
     $contenedor.innerHTML = `<h2>¡Sorry! There are no events to show :(</h2>`
   }
   else{
-    for (const evento of array) {
+    for (const evento of arreglo) {
       plantilla += crearEventos(evento);
     }
     $contenedor.innerHTML = (plantilla);
   }
 }
-template(arrayEventosUpcoming)
+template(arregloEventosUpcoming)
 
 function crearEventos(eventoSolo){
   return `<div class="card col-11 col-md-4 col-xl-3 ">
@@ -84,13 +84,13 @@ function imprimirCheckboxs(categoria, checkbox){
   }
   checkbox.innerHTML = (plantilla);
 }
-imprimirCheckboxs(arrayCategorias, $checkBoxs)
+imprimirCheckboxs(arregloCategorias, $checkBoxs)
 
 
-function filtrarUpcoming(array){
+function filtrarUpcoming(arreglo){
   const fechaActual = data.fechaActual;
 
-  const filtroUpcomingEvents = array.filter(evento => evento.date > fechaActual)
+  const filtroUpcomingEvents = arreglo.filter(evento => evento.date > fechaActual)
 
   return filtroUpcomingEvents;
 }
