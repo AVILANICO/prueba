@@ -1,22 +1,18 @@
 const $contenedor = document.getElementById('contenedor-eventos');
 
-console.log([document]);
 let urlParams = location.search; //buscamos todo URL: %20id=Korean%20style 
-console.log(urlParams);
+
+//se crea un nuevo objeto URLSearchParams que permite acceder y manipular los parametros de una URL mediante el metodo "get".
 let params = new URLSearchParams(urlParams)
-console.log(params);
 
-let id = params.get('id') 
 //el get nos devuelve la direccion url de cada card pero sin la palabrita "id", solo nos devuelve el valor de id: Korean%20style 
+let id = params.get('id') 
 
-console.log(id); 
 
 let arrayEventos = data.eventos;
 
-
 let eventoFiltrado = arrayEventos.find(evento => evento.name == id)
 
-console.log(eventoFiltrado);
 
 function imprimirDetail(evento){
   let plantilla = `

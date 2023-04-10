@@ -1,3 +1,4 @@
+//REFERENCIAS
 const $contenedor = document.getElementById('contenedor-eventos');
 const $checkBoxs = document.getElementById('div-checkBoxs');
 const $buscador = document.getElementById('buscador');
@@ -7,7 +8,7 @@ let arregloEventosUpcoming = filtrarUpcoming(arregloEventos);//ARRAY FILTRADOR D
 
 //SETEADO
 
-const eventos = arregloEventos.filter(cat => cat.category) //agentes
+const eventos = arregloEventos.filter(cat => cat.category)
 
 //"categorias" me devuelve un arreglo con solo las categorias
 const categorias = eventos.map(event => event.category)
@@ -24,7 +25,7 @@ const arregloCategorias = Array.from(setCategorias)
 $checkBoxs.addEventListener("click", () => {
   //querySelectorAll('input:checked') selecciona todos los elementos <input> que están chequeados (osea que tienen el atributo checked).
   //Array.from() convierte el NodeList resultante de querySelectorAll en un Array.
-  //.map(cb => cb.id) aplica una función de mapeo a cada elemento del Array resultante. La función de mapeo toma cada elemento (representado por la variable cb) y devuelve su valor del atributo id. Entonces el resultado final es un nuevo Array que contiene solo los valores del atributo id de los elementos chequeados.
+  //.map(event => event.id) aplica una función de mapeo a cada elemento del Array resultante. La función de mapeo toma cada elemento (representado por la variable cb) y devuelve su valor del atributo id. Entonces el resultado final es un nuevo Array que contiene solo los valores del atributo id de los elementos chequeados.
   //Por lo tanto, el código arregloCheckboxsID contiene un Array con los id de los checkboxes que han sido seleccionados en el momento del evento 'click'
   const arregloCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
 
@@ -89,9 +90,7 @@ imprimirCheckboxs(arregloCategorias, $checkBoxs)
 
 function filtrarUpcoming(arreglo){
   const fechaActual = data.fechaActual;
-
   const filtroUpcomingEvents = arreglo.filter(evento => evento.date > fechaActual)
-
   return filtroUpcomingEvents;
 }
 

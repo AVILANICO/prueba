@@ -1,14 +1,18 @@
+//REFERENCIAS
 const $contenedor = document.getElementById('contenedor-eventos');
 const $checkBoxs = document.getElementById('div-checkBoxs');
 const $buscador = document.getElementById('buscador');
 
 let arregloEventos = data.eventos;
-const eventos = arregloEventos.filter(cat => cat.category) //agentes
+
+//"eventos" es un nuevo arreglo que contiene solo las categorias.
+const eventos = arregloEventos.filter(cat => cat.category)
 
 
 //SETEADO
 
 //"categorias" me devuelve un arreglo con solo las categorias
+// averiguar bien como funciona el metodo .map
 const categorias = eventos.map(event => event.category)
 
 //el set "filtra" lo repetido
@@ -20,13 +24,13 @@ const arregloCategorias = Array.from(setCategorias)
 
 //EVENTOS
 /*-----------------------------------------------------------------------------------------------------------------------*/
+
 $checkBoxs.addEventListener("click", () => {
   //querySelectorAll('input:checked') selecciona todos los elementos <input> que están chequeados (osea que tienen el atributo checked).
   //Array.from() convierte el NodeList resultante de querySelectorAll en un Array.
-  //.map(cb => cb.id) aplica una función de mapeo a cada elemento del Array resultante. La función de mapeo toma cada elemento (representado por la variable cb) y devuelve su valor del atributo id. Entonces el resultado final es un nuevo Array que contiene solo los valores del atributo id de los elementos chequeados.
+  //.map(event => event.id) aplica una función de mapeo a cada elemento del Array resultante. La función de mapeo toma cada elemento (representado por la variable cb) y devuelve su valor del atributo id. Entonces el resultado final es un nuevo Array que contiene solo los valores del atributo id de los elementos chequeados.
   //Por lo tanto, el código arregloCheckboxsID contiene un Array con los id de los checkboxes que han sido seleccionados en el momento del evento 'click'
   const arregloCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
-
   const eventosFiltrados = filtroCruzado(eventos, arregloCheckboxsID, $buscador.value)
   template(eventosFiltrados)
 }) 
@@ -34,9 +38,7 @@ $checkBoxs.addEventListener("click", () => {
 $buscador.addEventListener("input", () => {
 
   const arregloCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
-
   const eventosFiltrados = filtroCruzado(eventos, arregloCheckboxsID, $buscador.value)
-
   template(eventosFiltrados)
 })
 
@@ -60,6 +62,7 @@ function crearEventos(eventoSolo){
 
 function template(arreglo){
   let plantilla = '';
+
   if(arreglo.length === 0){
     $contenedor.innerHTML = `<h2>¡Sorry! There are no eventos to show :(</h2>`
   }
@@ -72,6 +75,7 @@ function template(arreglo){
 }
 template(arregloEventos)
 
+//esta funcion recibe dos parametros: arreglo de categorias y el div contenedor de los checkbox.
 function imprimirCheckboxs(categoria, checkbox){
   let plantilla = '';
 
@@ -88,10 +92,14 @@ imprimirCheckboxs(arregloCategorias, $checkBoxs)
 
 //FUNCION FILTRO
 /*-----------------------------------------------------------------------------------------------------------------------*/
+//en "eventos" ingresa el arreglo de todos los eventos.
+//en "categoria" ingresa el arreglo de los checkboxs activados
+//en "texto" ingresa el "value" del texto ingresado por el usuario.
+
 function filtroCruzado(eventos, categoria, texto){
   let eventosFiltrados = eventos;
-  //si hay alguna categoría seleccionada, se filtran los eventos que tengan la misma categoría que la seleccionada.
-  
+
+  //si hay alguna categoría seleccionada en los checkboxs, se filtran los eventos que tengan el mismo ID de la categoría seleccionada.
   if (categoria.length > 0) {
     eventosFiltrados = eventos.filter(evento => categoria.includes(evento.category));
   }
