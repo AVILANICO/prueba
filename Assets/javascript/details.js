@@ -1,18 +1,20 @@
 const $contenedor = document.getElementById('contenedor-eventos');
 
-let urlParams = location.search; //buscamos todo URL: %20id=Korean%20style 
-
-//se crea un nuevo objeto URLSearchParams que permite acceder y manipular los parametros de una URL mediante el metodo "get".
-let params = new URLSearchParams(urlParams)
-
-//el get nos devuelve la direccion url de cada card pero sin la palabrita "id", solo nos devuelve el valor de id: Korean%20style 
-let id = params.get('id') 
 
 
-let arrayEventos = data.eventos;
+let nuevoArregloEventos;
 
-let eventoFiltrado = arrayEventos.find(evento => evento.name == id)
-
+fetch('https://mindhub-xj03.onrender.com/api/amazing')
+    .then(data => data.json())
+    .then( res => {
+      nuevoArregloEventos = res.events;
+      let urlParams = location.search;
+      let params = new URLSearchParams(urlParams)
+      let id = params.get('id') 
+      let eventoFiltrado = nuevoArregloEventos.find(evento => evento._id == id)
+      imprimirDetail(eventoFiltrado)
+    })
+    .catch(err => console.log(err))
 
 function imprimirDetail(evento){
   let plantilla = `
@@ -32,4 +34,3 @@ function imprimirDetail(evento){
 
   $contenedor.innerHTML = plantilla;
 }
-imprimirDetail(eventoFiltrado)

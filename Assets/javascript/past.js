@@ -5,38 +5,32 @@ const $buscador = document.getElementById('buscador');
 let arregloEventos = data.eventos; //ARRAY TOTAL
 let arregloEventosPast = filtrarPast(arregloEventos);//ARRAY FILTRADOR DE EVENTOS PAST
 
+let nuevoArregloEventos;
 
-//SETEADO
-const eventos = arregloEventos.filter(cat => cat.category)
+fetch('https://mindhub-xj03.onrender.com/api/amazing')
+    .then(data => data.json())
+    .then( res => {
+      nuevoArregloEventos = res.events;
+      const nuevasCategorias = [...new Set(nuevoArregloEventos.map(event => event.category))]
 
-//"categorias" me devuelve un arreglo con solo las categorias
-const categorias = eventos.map(event => event.category)
+      const nuevoArregloEventosPast = filtrarPast(nuevoArregloEventos);//ARRAY FILTRADOR DE EVENTOS UPCOMING
 
-//el set "filtra" lo repetido
-const setCategorias = new Set(categorias);
+      imprimirCheckboxs(nuevasCategorias, $checkBoxs)
+      template(nuevoArregloEventosPast, $contenedor)
 
-//Array.from me transforma en array lo que le pase como argumento.
-const arregloCategorias = Array.from(setCategorias)
+      $checkBoxs.addEventListener("click", () => {
+        const arregloCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
+        const eventosFiltrados = filtroCruzado(nuevoArregloEventosPast, arregloCheckboxsID, $buscador.value)
+        template(eventosFiltrados)
+      })
+      $buscador.addEventListener("input", () => {
+        const arregloCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
+        const eventosFiltrados = filtroCruzado(nuevoArregloEventosPast, arregloCheckboxsID, $buscador.value)
+        template(eventosFiltrados)
+      })
+    })
+    .catch(err => console.log(err))
 
-
-//EVENTOS
-/*-----------------------------------------------------------------------------------------------------------------------*/
-$checkBoxs.addEventListener("click", () => {
-  //querySelectorAll('input:checked') selecciona todos los elementos <input> que están chequeados (osea que tienen el atributo checked).
-  //Array.from() convierte el NodeList resultante de querySelectorAll en un Array.
-  //.map(event => event.id) aplica una función de mapeo a cada elemento del Array resultante. La función de mapeo toma cada elemento (representado por la variable cb) y devuelve su valor del atributo id. Entonces el resultado final es un nuevo Array que contiene solo los valores del atributo id de los elementos chequeados.
-  //Por lo tanto, el código arregloCheckboxsID contiene un Array con los id de los checkboxes que han sido seleccionados en el momento del evento 'click'
-  const arregloCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
-  const eventosFiltrados = filtroCruzado(arregloEventosPast, arregloCheckboxsID, $buscador.value)
-  template(eventosFiltrados)
-})
-
-$buscador.addEventListener("input", () => {
-
-  const arregloCheckboxsID = Array.from($checkBoxs.querySelectorAll('input:checked')).map(event => event.id);
-  const eventosFiltrados = filtroCruzado(arregloEventosPast, arregloCheckboxsID, $buscador.value)
-  template(eventosFiltrados)
-})
 
 //FUNCIONES
 /*-----------------------------------------------------------------------------------------------------------------------*/
@@ -53,8 +47,6 @@ function template(array){
     $contenedor.innerHTML = (plantilla);
   }
 }
-template(arregloEventosPast)
-
 function crearEventos(eventoSolo){
   return `<div class="card col-11 col-md-4 col-xl-3 ">
             <img id="imgCards" src="${eventoSolo.image}" class="card-img-top" alt="img">
@@ -63,13 +55,12 @@ function crearEventos(eventoSolo){
               <p class="card-text"> Price: ${eventoSolo.description} </p>
               <div class = "div-precioBoton">
                 <p class="card-text"> Price: ${eventoSolo.price} </p>
-                <a href="./details.html?id=${eventoSolo.name}" class="btn btn-primary">Details</a>
+                <a href="./details.html?id=${eventoSolo._id}" class="btn btn-primary">Details</a>
               </div>
             </div>
           </div> 
 `
 }
-
 function imprimirCheckboxs(categoria, checkbox){
   let plantilla = '';
   for (const evento of categoria) {
@@ -81,15 +72,10 @@ function imprimirCheckboxs(categoria, checkbox){
   }
   checkbox.innerHTML = (plantilla);
 }
-imprimirCheckboxs(arregloCategorias, $checkBoxs)
-
-
 function filtrarPast(arreglo){
-  const fechaActual = data.fechaActual;
-  const filtroPastEventos = arreglo.filter(evento => evento.date < fechaActual)
+  const filtroPastEventos = arreglo.filter(evento => evento.date < "2023-03-10")
   return filtroPastEventos;
 }
-
 function filtroCruzado(eventos, categoria, texto){
   let eventosFiltrados = eventos;
   //si hay alguna categoría seleccionada, se filtran los eventos que tengan la misma categoría que la seleccionada.
