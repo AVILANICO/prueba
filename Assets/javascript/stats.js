@@ -4,7 +4,7 @@ const $tbody3 = document.getElementById('tbody3')
 
 
 
-let nuevoArregloEventos;
+let nuevoArregloEventos; 
 
 fetch('https://mindhub-xj03.onrender.com/api/amazing')
     .then(data => data.json())
