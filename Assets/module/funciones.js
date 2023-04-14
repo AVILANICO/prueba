@@ -1,11 +1,11 @@
 export function imprimirCheckboxs(categorias, checkbox){
   let plantilla = '';
 
-  for (const evento of categorias) {
+  for (const categoria of categorias) {
     plantilla += `
     <div class="divInputLabel">
-      <input type="checkbox" name="CheckBox" id="${evento}" class="classCheckbox">
-      <label for="${evento}">${evento}</label>
+      <input type="checkbox" name="CheckBox" id="${categoria}" class="classCheckbox">
+      <label for="${categoria}">${categoria}</label>
     </div>`;
   }
   checkbox.innerHTML = plantilla;

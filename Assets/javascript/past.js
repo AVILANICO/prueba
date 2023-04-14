@@ -35,13 +35,13 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
 //FUNCIONES
 /*-----------------------------------------------------------------------------------------------------------------------*/
 
-function template(array){
+function template(arreglo){
   let plantilla = '';
-  if(array.length === 0){
+  if(arreglo.length === 0){
     $contenedor.innerHTML = `<h2>¡Sorry! There are no events to show :(</h2>`
   }
   else{
-    for (const evento of array) {
+    for (const evento of arreglo) {
       plantilla += crearEventos(evento);
     }
     $contenedor.innerHTML = (plantilla);
@@ -61,13 +61,13 @@ function crearEventos(eventoSolo){
           </div> 
 `
 }
-function imprimirCheckboxs(categoria, checkbox){
+function imprimirCheckboxs(categorias, checkbox){
   let plantilla = '';
-  for (const evento of categoria) {
+  for (const categoria of categorias) {
     plantilla += `
     <div class="divInputLabel">
-      <input type="checkbox" name="CheckBox" id="${evento}" class="classCheckbox">
-      <label for="${evento}">${evento}</label>
+      <input type="checkbox" name="CheckBox" id="${categoria}" class="classCheckbox">
+      <label for="${categoria}">${categoria}</label>
     </div>`;
   }
   checkbox.innerHTML = (plantilla);

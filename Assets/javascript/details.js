@@ -16,19 +16,19 @@ fetch('https://mindhub-xj03.onrender.com/api/amazing')
     })
     .catch(err => console.log(err))
 
-function imprimirDetail(evento){
+function imprimirDetail(arregloEvento){
   let plantilla = `
   <div class="card col-11 col-md-4 col-xl-3 ">
-    <img id="imgCards" src="${evento.image}" class="card-img-top" alt="img">
+    <img id="imgCards" src="${arregloEvento.image}" class="card-img-top" alt="img">
     <div class="card-body">
-      <h3 class="card-title">${evento.name}</h3>
-      <p class="card-title"><b>Date:</b> ${evento.date}</p>
-      <p class="card-title"><b>Description:</b> ${evento.description}</p>
-      <p class="card-title"><b>Category:</b> ${evento.category}</p>
-      <p class="card-title"><b>Place:</b> ${evento.place}</p>
-      <p class="card-title"><b>Capacity:</b> ${evento.capacity}</p>
-      <p class="card-title"><b>Assistance:</b> ${evento.assistance}</p>
-      <p class="card-title"><b>Prince:</b> ${evento.price}</p>
+      <h3 class="card-title">${arregloEvento.name}</h3>
+      <p class="card-title"><b>Date:</b> ${arregloEvento.date}</p>
+      <p class="card-title"><b>Description:</b> ${arregloEvento.description}</p>
+      <p class="card-title"><b>Category:</b> ${arregloEvento.category}</p>
+      <p class="card-title"><b>Place:</b> ${arregloEvento.place}</p>
+      <p class="card-title"><b>Capacity:</b> ${arregloEvento.capacity}</p>
+      <p class="card-title"><b>Assistance:</b> ${arregloEvento.assistance}</p>
+      <p class="card-title"><b>Prince:</b> ${arregloEvento.price}</p>
     </div> 
   </div>`
 
