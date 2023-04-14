@@ -1,3 +1,15 @@
+export function imprimirCheckboxs(categorias, checkbox){
+  let plantilla = '';
+
+  for (const evento of categorias) {
+    plantilla += `
+    <div class="divInputLabel">
+      <input type="checkbox" name="CheckBox" id="${evento}" class="classCheckbox">
+      <label for="${evento}">${evento}</label>
+    </div>`;
+  }
+  checkbox.innerHTML = plantilla;
+}
 export function crearEventos(eventoSolo){
   return `<div class="card col-11 col-md-4 col-xl-3 ">
             <img id="imgCards" src="${eventoSolo.image}" class="card-img-top" alt="img">
@@ -6,7 +18,7 @@ export function crearEventos(eventoSolo){
               <p class="card-text"> Price: ${eventoSolo.description} </p>
               <div class = "div-precioBoton">
                 <p class="card-text"> Price: ${eventoSolo.price} </p>
-                <a href="./assets/pages/details.html?id=${eventoSolo.name}" class="btn btn-primary">Details</a>
+                <a href="./assets/pages/details.html?id=${eventoSolo._id}" class="btn btn-primary">Details</a>
               </div>
             </div> 
           </div>`
@@ -23,18 +35,6 @@ export function template(arreglo, contenedor){
     contenedor.innerHTML = plantilla;
   }
 }
-export function imprimirCheckboxs(categoria, checkbox){
-  let plantilla = '';
-
-  for (const evento of categoria) {
-    plantilla += `
-    <div class="divInputLabel">
-      <input type="checkbox" name="CheckBox" id="${evento}" class="classCheckbox">
-      <label for="${evento}">${evento}</label>
-    </div>`;
-  }
-  checkbox.innerHTML = plantilla;
-}
 export function filtroCruzado(eventos, categoria, texto){
   let eventosFiltrados = eventos;
 
@@ -46,14 +46,3 @@ export function filtroCruzado(eventos, categoria, texto){
   }
   return eventosFiltrados;
 }
-export function filtrarUpcoming(arreglo){
-  const fechaActual = data.fechaActual;
-  const filtroUpcomingEvents = arreglo.filter(evento => evento.date > fechaActual)
-  return filtroUpcomingEvents;
-}
-export function filtrarPast(arreglo){
-  const fechaActual = data.fechaActual;
-  const filtroPastEventos = arreglo.filter(evento => evento.date < fechaActual)
-  return filtroPastEventos;
-}
-

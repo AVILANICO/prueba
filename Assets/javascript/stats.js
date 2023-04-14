@@ -2,8 +2,6 @@ const $tbody1 = document.getElementById('tbody1')
 const $tbody2 = document.getElementById('tbody2')
 const $tbody3 = document.getElementById('tbody3')
 
-
-
 let nuevoArregloEventos; 
 
 fetch('https://mindhub-xj03.onrender.com/api/amazing')
